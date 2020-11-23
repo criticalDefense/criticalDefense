@@ -1,0 +1,144 @@
+{% extends 'layouts/base.html' %} {% block title %} Anon Tip{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Anon Tip</h5>
+      </div>
+      <div class="card-body">
+        <form action='' method='POST'>
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-12 pr-md-1">
+              <div class="form-group">
+                <label>Person(s) Displaying Concerning Behavior(Name, Age, Residence
+                  Address)</label>
+                <textarea rows="4" cols="80" class="form-control" id="persons"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pr-md-1">
+              <div class="form-group">
+                <label>Description of the concern</label>
+                <textarea rows="4" cols="80" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pr-md-1">
+              <div class="form-group">
+                <label
+                  >When and where is the incident/action going to occur?</label
+                >
+                <textarea rows="4" cols="80" class="form-control" id=''></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 pr-md-1">
+              <div class="form-group">
+                <label>Is anyone else aware of the concern</label>
+                <textarea rows="4" cols="80" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>If yes who</label>
+                <textarea rows="4" cols="80" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>Additiona Information</label>
+                <textarea rows="4" cols="80" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>Are you willing to speak with an investigator</label>
+                <textarea rows="4" cols="80" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label
+                  >If yes, please provide your name and/or phone number</label
+                >
+                <textarea rows="4" cols="80" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-fill btn-primary" id="submit" >Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% csrf_token %}<script>
+var token = '{% csrf_token %}';
+$(document).ready(function(){
+    $("button").click(
+      function() {
+        var yourdomain = 'newaccount1604908119199'; // Your freshdesk domain name. Ex., yourcompany
+        var api_key = 'r0iiM2UkwZnkybzsbk9'; // Ref: https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key
+        
+        var person = $('#persons');
+        var subject = person.val();
+
+       
+        console.log('token:' + token);
+        ticket_data = '{ "description": "jack",  "subject": subject, "email": "tom@outerspace.com", "priority": 1, "status": 2, "cc_emails": ["ram@freshdesk.com","diana@freshdesk.com"], csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val()}, }';
+
+        $.ajax(
+          {
+            url: "https://"+yourdomain+".freshdesk.com/api/v2/tickets",
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: {
+              "csrfmiddlewaretoken":$('input[name=csrfmiddlewaretoken]').val(),
+              "Authorization": "Basic " + btoa(api_key + ":x")
+            },
+            data: ticket_data, 
+                    
+            success: function(data, textStatus, jqXHR) {
+              
+              console.log('YESSSSS');
+            },
+            error: function(jqXHR, tranStatus) {
+              $('#result').text('Error');
+              $('#code').text(jqXHR.status);
+              x_request_id = jqXHR.getResponseHeader('X-Request-Id');
+              response_text = jqXHR.responseText;
+              $('#response').html(" Error Message : <b style='color: red'>"+response_text+"</b>.<br/> Your X-Request-Id is : <b>" + x_request_id + "</b>. Please contact support@freshdesk.com with this id for more information.");
+
+            }
+          }
+        );
+      }
+    );
+});
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+{% endblock javascripts %}

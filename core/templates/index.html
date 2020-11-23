@@ -1,0 +1,240 @@
+{% extends "layouts/base.html" %} {% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-chart">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6 text-left">
+            <h5 class="card-category">Incidents</h5>
+            <h2 class="card-title">Performance</h2>
+          </div>
+          <div class="col-sm-6">
+            <div
+              class="btn-group btn-group-toggle float-right"
+              data-toggle="buttons"
+            >
+              <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                <input type="radio" name="options" checked />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >Facebook</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-single-02"></i>
+                </span>
+              </label>
+              <label class="btn btn-sm btn-primary btn-simple" id="1">
+                <input type="radio" class="d-none d-sm-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >Twitter</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-gift-2"></i>
+                </span>
+              </label>
+              <label class="btn btn-sm btn-primary btn-simple" id="2">
+                <input type="radio" class="d-none" name="options" />
+                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >Reddit</span
+                >
+                <span class="d-block d-sm-none">
+                  <i class="tim-icons icon-tap-02"></i>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="chart-area">
+          <canvas id="chartBig1"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-category">Districts</h5>
+        <h3 class="card-title">
+          <i class="tim-icons icon-molecule-40 text-primary"></i>
+        </h3>
+      </div>
+      <div class="card-body">
+        <div class="chart-area">
+          <canvas id="chartLinePurple"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-category">Incidents by Date</h5>
+        <h3 class="card-title">
+          <i class="tim-icons icon-delivery-fast text-info"></i>
+        </h3>
+      </div>
+      <div class="card-body">
+        <div class="chart-area">
+          <canvas id="CountryChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-category">Type of events by district</h5>
+        <h3 class="card-title">
+          <i class="tim-icons icon-send text-success"></i>
+        </h3>
+      </div>
+      <div class="card-body">
+        <div class="chart-area">
+          <canvas id="chartLineGreen"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="search-bar input-group input">
+          <input
+            class="search-bar"
+            type="text"
+            name=""
+            placeholder="Search..."
+          />
+          <a href="#" class="search_icon"
+            ><i class="tim-icons icon-zoom-split text-primary"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <div class="card card-tasks">
+      <div class="card-header"><u>Active Incidents</u></div>
+
+      <div class="card-body">
+        <div class="table-full-width table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <tr>
+                <th>ID</th>
+                <th>Analyst</th>
+                <th>Reported To</th>
+                <th>Summary</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody class="open"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <div class="card card-tasks">
+      <div class="card-header"><u>Closed Incidents</u></div>
+
+      <div class="card-body">
+        <div class="table-full-width table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <tr>
+                <th>ID</th>
+                <th>Analyst</th>
+                <th>Reported To</th>
+                <th>Summary</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody class="closed"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "results.json", true);
+  xhr.responseType = "text";
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      console.log(data);
+    }
+  };
+  $(document).ready(function () {
+    // Javascript method's body can be found in assets/js/demos.js
+    demo.initDashboardPageCharts();
+    $(window).load(function () {
+      var yourdomain = "newaccount1604908119199"; // Your freshdesk domain name. Ex., yourcompany
+      var api_key = "r0iiM2UkwZnkybzsbk9"; // Ref: https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key
+
+      $.ajax({
+        url: "https://" + yourdomain + ".freshdesk.com/api/v2/tickets",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+          Authorization: "Basic " + btoa(api_key + ":x"),
+        },
+        success: function (data) {
+          var tickets = "";
+          $.each(data, function (key, value) {
+            if (value.status == 5) {
+              tickets += "<tr>";
+              tickets += "<td>" + value.requester_id + "</td>";
+              tickets += "<td>" + value.subject + "</td>";
+              tickets += "<td>" + value.group_id + "</td>";
+              tickets += "<td>" + value.subject + "</td>";
+              tickets += "<td>" + value.status + "</td>";
+              tickets += "</tr>";
+            }
+          });
+          $(".closed").append(tickets);
+        },
+        error: function (jqXHR, tranStatus) {
+          $("#result").text("Error");
+          $("#code").text(jqXHR.status);
+          x_request_id = jqXHR.getResponseHeader("X-Request-Id");
+          response_text = jqXHR.responseText;
+          $("#response").html(
+            " Error Message : <b style='color: red'>" +
+              response_text +
+              "</b>.<br/> Your X-Request-Id is : <b>" +
+              x_request_id +
+              "</b>. Please contact support@freshdesk.com with this id for more information."
+          );
+        },
+      });
+    });
+    $(window).load(function () {});
+  });
+</script>
+
+{% endblock javascripts %}
