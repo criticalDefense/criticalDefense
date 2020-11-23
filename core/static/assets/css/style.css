@@ -1,0 +1,11 @@
+.centered {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  margin-top: -170px !important;
+  margin-left: -210px !important;
+}
+
+.input-border:focus {
+    border-color: #2b3553 !important;
+}
