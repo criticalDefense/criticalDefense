@@ -40,8 +40,7 @@ SHARED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tenant_users.permissions', # Defined in both shared apps and tenant apps
-    'tenant_users.tenants', # defined only in shared apps
+    
     'customer', # Custom defined app that contains the TenantModel. Must NOT exist in TENANT_APPS
     'users', # Custom app that contains the new User Model (see below). Must NOT exist in TENANT_APPS
 
@@ -51,7 +50,7 @@ SHARED_APPS = (
 TENANT_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'tenant_users.permissions'
+    
     
 
     # your tenant-specific apps
@@ -60,8 +59,8 @@ TENANT_APPS = (
 )
 
 TENANT_MODEL = "customer.Client" # app.Model
- AUTH_USER_MODEL = 'authentication.TenantUser'
- TENANT_USERS_DOMAIN = "localhost"
+AUTH_USER_MODEL = 'authentication.TenantUser'
+TENANT_USERS_DOMAIN = "localhost"
 
 
 INSTALLED_APPS = (
@@ -76,7 +75,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tenant_users.permissions'
+    
      
 )
 SITE_ID = 1
