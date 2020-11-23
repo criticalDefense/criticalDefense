@@ -6,7 +6,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django import template
-from .services import FreshDeskAPI
+
 
 
 @login_required(login_url="/login/")
@@ -35,10 +35,4 @@ def pages(request):
         return HttpResponse(html_template.render(context, request))
 
 
-class GetTickets(TemplateView):
-    template_name = '/'
-    def get_context_data(self, *args, **kwargs):
-        context = {
-            'tickets' : get_tickets(),
-        }
-        return context
+
