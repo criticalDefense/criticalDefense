@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %} {% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <div class="card card-tasks">
+      <div class="card-header"><u>All Incidents</u></div>
+
+      <div class="card-body">
+        <div class="table-full-width table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <tr>
+                <th>ID</th>
+                <th>Analyst</th>
+                <th>Reported To</th>
+                <th>Summary</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody class="closed"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
