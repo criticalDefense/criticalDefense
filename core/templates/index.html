@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-sm-6 text-left">
             <h5 class="card-category">Incidents</h5>
-            <h2 class="card-title">Performance</h2>
+            <h2 class="card-title">Analytics</h2>
           </div>
           <div class="col-sm-6">
             <div
@@ -20,7 +20,7 @@
               <label class="btn btn-sm btn-primary btn-simple active" id="0">
                 <input type="radio" name="options" checked />
                 <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
-                  >Facebook</span
+                  >All Incidents</span
                 >
                 <span class="d-block d-sm-none">
                   <i class="tim-icons icon-single-02"></i>
@@ -29,7 +29,7 @@
               <label class="btn btn-sm btn-primary btn-simple" id="1">
                 <input type="radio" class="d-none d-sm-none" name="options" />
                 <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
-                  >Twitter</span
+                  >Reported Incidents</span
                 >
                 <span class="d-block d-sm-none">
                   <i class="tim-icons icon-gift-2"></i>
@@ -38,7 +38,7 @@
               <label class="btn btn-sm btn-primary btn-simple" id="2">
                 <input type="radio" class="d-none" name="options" />
                 <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
-                  >Reddit</span
+                  >Special Events</span
                 >
                 <span class="d-block d-sm-none">
                   <i class="tim-icons icon-tap-02"></i>
@@ -106,51 +106,8 @@
 
 <div class="row">
   <div class="col-lg-12 col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="search-bar input-group input">
-          <input
-            class="search-bar"
-            type="text"
-            name=""
-            placeholder="Search..."
-          />
-          <a href="#" class="search_icon"
-            ><i class="tim-icons icon-zoom-split text-primary"></i
-          ></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-12 col-md-12">
     <div class="card card-tasks">
       <div class="card-header"><u>Active Incidents</u></div>
-
-      <div class="card-body">
-        <div class="table-full-width table-responsive">
-          <table class="table">
-            <thead class="text-primary">
-              <tr>
-                <th>ID</th>
-                <th>Analyst</th>
-                <th>Reported To</th>
-                <th>Summary</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody class="open"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-12 col-md-12">
-    <div class="card card-tasks">
-      <div class="card-header"><u>Closed Incidents</u></div>
 
       <div class="card-body">
         <div class="table-full-width table-responsive">
@@ -178,22 +135,13 @@
 {% block javascripts %}
 
 <script>
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "results.json", true);
-  xhr.responseType = "text";
-
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      var data = JSON.parse(xhr.responseText);
-      console.log(data);
-    }
-  };
   $(document).ready(function () {
     // Javascript method's body can be found in assets/js/demos.js
     demo.initDashboardPageCharts();
+
     $(window).load(function () {
-      var yourdomain = "newaccount1604908119199"; // Your freshdesk domain name. Ex., yourcompany
-      var api_key = "r0iiM2UkwZnkybzsbk9"; // Ref: https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key
+      var yourdomain = "newaccount1602768346955"; // Your freshdesk domain name. Ex., yourcompany
+      var api_key = "7RBC0Ki8KRl8jWKdlKN"; // Ref: https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key
 
       $.ajax({
         url: "https://" + yourdomain + ".freshdesk.com/api/v2/tickets",
@@ -206,15 +154,13 @@
         success: function (data) {
           var tickets = "";
           $.each(data, function (key, value) {
-            if (value.status == 5) {
-              tickets += "<tr>";
-              tickets += "<td>" + value.requester_id + "</td>";
-              tickets += "<td>" + value.subject + "</td>";
-              tickets += "<td>" + value.group_id + "</td>";
-              tickets += "<td>" + value.subject + "</td>";
-              tickets += "<td>" + value.status + "</td>";
-              tickets += "</tr>";
-            }
+            tickets += "<tr>";
+            tickets += "<td>" + value.requester_id + "</td>";
+            tickets += "<td>" + value.subject + "</td>";
+            tickets += "<td>" + value.group_id + "</td>";
+            tickets += "<td>" + value.subject + "</td>";
+            tickets += "<td>" + value.status + "</td>";
+            tickets += "</tr>";
           });
           $(".closed").append(tickets);
         },
@@ -233,7 +179,97 @@
         },
       });
     });
-    $(window).load(function () {});
+
+    $(".search_icon").click(function () {
+      var xmlhttp = new XMLHttpRequest();
+
+      var theUrl = "static/assets/js/results.json";
+
+      xmlhttp.open("GET", theUrl);
+
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+      xmlhttp.responseType = "json";
+
+      xmlhttp.onload = function (e) {
+        if (this.status == 201) {
+          //API returns 201 (Created)
+
+          console.log("response", this.response); // JSON response
+        }
+      };
+
+      xmlhttp.send(JSON.stringify());
+
+      var name = $("#inputSearch").val();
+      console.log(name);
+      var company = $("#inputCompany").val();
+      console.log(company);
+
+      var xmlhttp = new XMLHttpRequest();
+
+      var theUrl = "http://3.20.206.8:5000/api/advancedtopic";
+
+      xmlhttp.open("POST", theUrl);
+
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+
+      xmlhttp.responseType = "json";
+
+      xmlhttp.onload = function (e) {
+        if (this.status == 201) {
+          //API returns 201 (Created)
+
+          console.log("response", this.response); // JSON response
+        }
+        var data = xmlhttp.response.id;
+        console.log("hi" + data);
+        localStorage.setItem("searchID", JSON.stringify(data));
+      };
+
+      xmlhttp.send(
+        JSON.stringify({
+          Name: name,
+          Organization: company,
+          Token: "53b7e0fa52b1451fa254dca9ae9a8505",
+        })
+      );
+      setTimeout(function () {
+        var results = localStorage.getItem("searchID");
+        console.log("data: ", JSON.parse(results));
+        var data = JSON.parse(results);
+        var apiUrl = "static/assets/js/results.json";
+        console.log(apiUrl);
+        var settings = {
+          url: apiUrl,
+          method: "GET",
+          timeout: 0,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+          var data = response;
+          var items = data.results.map(function (result) {
+            return result;
+          });
+          var results = "";
+          $.each(items, function (key, value) {});
+          console.log(items[0]);
+          results += "<tr>";
+          results += "<td>" + items[0].b8_source_datetime_created + "</td>";
+          results += "<td>" + items[0].b8_contains_media + "</td>";
+          results += "<td>" + items[0].b8_network + "</td>";
+          results += "<td>" + items[0].b8_url + "</td>";
+          results += "<td>" + items[0].b8_text + "</td>";
+          results += "</tr>";
+
+          $(".open").append(results);
+        });
+      }, 200);
+    });
   });
 </script>
 

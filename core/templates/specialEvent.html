@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %} {% block title %} Incident{% endblock %}
+{% extends 'layouts/base.html' %} {% block title %} Special Events{% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %} {% block content %}
@@ -7,7 +7,7 @@
   <div class="col-md-8">
     <div class="card">
       <div class="card-header">
-        <h5 class="title">Incident</h5>
+        <h5 class="title">Anon Tip</h5>
       </div>
       <div class="card-body">
         <form action="" method="POST">
@@ -15,10 +15,7 @@
           <div class="row">
             <div class="col-md-12 pr-md-1">
               <div class="form-group">
-                <label
-                  >Person(s) Displaying Concerning Behavior(Name, Age, Residence
-                  Address)</label
-                >
+                <label>Name Of Event</label>
                 <textarea
                   rows="4"
                   cols="80"
@@ -31,7 +28,7 @@
           <div class="row">
             <div class="col-md-12 pr-md-1">
               <div class="form-group">
-                <label>Description of the concern</label>
+                <label>Date and Time</label>
                 <textarea rows="4" cols="80" class="form-control"></textarea>
               </div>
             </div>
@@ -39,9 +36,7 @@
           <div class="row">
             <div class="col-md-12 pr-md-1">
               <div class="form-group">
-                <label
-                  >When and where is the incident/action going to occur?</label
-                >
+                <label>Event Venue</label>
                 <textarea
                   rows="4"
                   cols="80"
@@ -54,7 +49,7 @@
           <div class="row">
             <div class="col-md-12 pr-md-1">
               <div class="form-group">
-                <label>Is anyone else aware of the concern</label>
+                <label>Location</label>
                 <textarea rows="4" cols="80" class="form-control"></textarea>
               </div>
             </div>
@@ -62,7 +57,7 @@
           <div class="row">
             <div class="col-md-8">
               <div class="form-group">
-                <label>If yes who</label>
+                <label>Point of contact</label>
                 <textarea rows="4" cols="80" class="form-control"></textarea>
               </div>
             </div>
@@ -70,25 +65,7 @@
           <div class="row">
             <div class="col-md-8">
               <div class="form-group">
-                <label>Additional Information</label>
-                <textarea rows="4" cols="80" class="form-control"></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-8">
-              <div class="form-group">
-                <label>Would you like to speak investigator</label>
-                <textarea rows="4" cols="80" class="form-control"></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-8">
-              <div class="form-group">
-                <label
-                  >If yes, please provide your name and/or phone number</label
-                >
+                <label>Additiona Information</label>
                 <textarea rows="4" cols="80" class="form-control"></textarea>
               </div>
             </div>
