@@ -1,0 +1,22 @@
+#header {
+    width: auto;
+    height: 40px;
+    padding: 10px 40px;
+    background: #2e3047;
+    line-height: 40px;
+    color: #3BBA9C;
+    overflow: hidden;
+}
+
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: #3bba9c;
+}
+
+div.breadcrumbs {
+    background: rgb(61, 88, 106);
+    padding: 10px 40px;
+    border: none;
+    font-size: 14px;
+    color: #c4dce8;
+    text-align: left;
+}

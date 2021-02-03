@@ -39,7 +39,9 @@
 
   <body class="">
     <div class="wrapper">
+      {% if user.is_authenticated %}
       {% include 'includes/sidebar.html' %}
+      {% endif %}
 
       <div class="main-panel">
         {% include 'includes/navigation.html' %}

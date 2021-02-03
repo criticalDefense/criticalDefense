@@ -16,24 +16,38 @@ PROJECT_DIR = Path(__file__).parent
 SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_1122')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # load production server from .env
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '134.209.208.72', config('SERVER', default='127.0.0.1')]
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '134.209.208.72', 'portal.local', 'knicks.portal.local','.portal.local', config('SERVER', default='127.0.0.1')]
 
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = [
+    'django_tenants',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'  # Enable the inner app 
+   
+    'customer',
 ]
 
+TENANT_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+     'app',  # Enable the inner app 
+]
+
+INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
+
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -44,6 +58,9 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+
+
+PUBLIC_SCHEMA_URLCONF = 'portal.urls_public'
 ROOT_URLCONF = 'core.urls'
 LOGIN_REDIRECT_URL = "home"   # Route defined in app/urls.py
 LOGOUT_REDIRECT_URL = "home"  # Route defined in app/urls.py
@@ -73,14 +90,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 if DEBUG: 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django_tenants.postgresql_backend',
+            'NAME': 'cdefense',
+            'USER': 'postgres',
+            'PASSWORD': 'Twocaper1',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 else:
     DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': 'criticaldefensedb',
         'USER': 'john',
         'PASSWORD': '1123Marlowe',
@@ -131,6 +152,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'core/media')
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
@@ -138,3 +161,19 @@ STATICFILES_DIRS = (
 )
 #############################################################
 #############################################################
+
+TENANT_MODEL = "customer.Client" # app.Model
+TENANT_DOMAIN_MODEL = "customer.Domain" # app.Model
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
+
+ #SMTP Configuration
+ 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'j.vargas2319@gmail.com'
+EMAIL_HOST_PASSWORD = 'Twocaper0954'
