@@ -9,7 +9,7 @@ from unipath import Path
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR    = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_DIR = Path(__file__).parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -19,9 +19,26 @@ SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_1122')
 DEBUG = True
 
 # load production server from .env
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '134.209.208.72', 'portal.local', 'knicks.portal.local','.portal.local', config('SERVER', default='127.0.0.1')]
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '134.209.208.72', 'portal.local',
+                 'knicks.portal.local', '.portal.local', config('SERVER', default='127.0.0.1')]
 
 # Application definition
+
+STATICFILES_FINDERS = [
+    "django_tenants.staticfiles.finders.TenantFileSystemFinder",  # Must be first
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+
+]
+
+MULTITENANT_STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "tenants/%s/static"),
+]
+
+STATICFILES_STORAGE = "django_tenants.staticfiles.storage.TenantStaticFilesStorage"
+
+# (default: create sub-directory for each tenant)
+MULTITENANT_RELATIVE_STATIC_ROOT = ""
 
 SHARED_APPS = [
     'django_tenants',
@@ -31,7 +48,8 @@ SHARED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-   
+
+
     'customer',
 ]
 
@@ -41,7 +59,7 @@ TENANT_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-     'app',  # Enable the inner app 
+    'app',  # Enable the inner app
 ]
 
 INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
@@ -59,12 +77,12 @@ MIDDLEWARE = [
 ]
 
 
-
 PUBLIC_SCHEMA_URLCONF = 'portal.urls_public'
 ROOT_URLCONF = 'core.urls'
 LOGIN_REDIRECT_URL = "home"   # Route defined in app/urls.py
 LOGOUT_REDIRECT_URL = "home"  # Route defined in app/urls.py
-TEMPLATE_DIR = os.path.join(BASE_DIR, "core/templates")  # ROOT dir for templates
+TEMPLATE_DIR = os.path.join(
+    BASE_DIR, "core/templates")  # ROOT dir for templates
 
 TEMPLATES = [
     {
@@ -75,6 +93,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -87,7 +106,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if DEBUG: 
+if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django_tenants.postgresql_backend',
@@ -100,15 +119,15 @@ if DEBUG:
     }
 else:
     DATABASES = {
-    'default': {
-        'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': 'criticaldefensedb',
-        'USER': 'john',
-        'PASSWORD': '1123Marlowe',
-        'HOST': 'localhost',
-        'PORT': '',
+        'default': {
+            'ENGINE': 'django_tenants.postgresql_backend',
+            'NAME': 'criticaldefensedb',
+            'USER': 'john',
+            'PASSWORD': '1123Marlowe',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
 
 
 # Password validation
@@ -153,24 +172,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'core/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'core/static'),
+    os.path.join(BASE_DIR, 'core/static/'),
 )
 #############################################################
 #############################################################
 
-TENANT_MODEL = "customer.Client" # app.Model
-TENANT_DOMAIN_MODEL = "customer.Domain" # app.Model
+TENANT_MODEL = "customer.Client"  # app.Model
+TENANT_DOMAIN_MODEL = "customer.Domain"  # app.Model
 
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
 )
 
- #SMTP Configuration
- 
+# SMTP Configuration
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

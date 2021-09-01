@@ -117,7 +117,7 @@ demo = {
       tooltips: {
         backgroundColor: '#f5f5f5',
         titleFontColor: '#333',
-        bodyFontColor: '#666',
+        bodyFontColor: '#d0e423',
         bodySpacing: 4,
         xPadding: 12,
         mode: "nearest",
@@ -160,6 +160,7 @@ demo = {
       maintainAspectRatio: false,
       legend: {
         display: false
+        
       },
 
       tooltips: {
@@ -185,7 +186,7 @@ demo = {
             suggestedMin: 60,
             suggestedMax: 125,
             padding: 20,
-            fontColor: "#9a9a9a"
+            fontColor: "#d0e423"
           }
         }],
 
@@ -198,7 +199,7 @@ demo = {
           },
           ticks: {
             padding: 20,
-            fontColor: "#9a9a9a"
+            fontColor: "#d0e423"
           }
         }]
       }
@@ -257,7 +258,10 @@ demo = {
       legend: {
         display: true,
         padding: 20,
-        position: 'bottom'
+        position: 'bottom',
+        labels: {
+          fontColor: '#d0e423'
+        }
       },
 
       tooltips: {
@@ -283,7 +287,7 @@ demo = {
             suggestedMin: 50,
             suggestedMax: 125,
             padding: 20,
-            fontColor: "#9e9e9e"
+            fontColor: "#d0e423"
           }
         }],
 
@@ -296,7 +300,7 @@ demo = {
           },
           ticks: {
             padding: 20,
-            fontColor: "#9e9e9e"
+            fontColor: "#d0e423"
           }
         }]
       }
@@ -335,7 +339,7 @@ demo = {
             suggestedMin: 0,
             suggestedMax: 5,
             padding: 20,
-            fontColor: "#9e9e9e"
+            fontColor: "#d0e423"
           }
         }],
 
@@ -348,7 +352,7 @@ demo = {
           },
           ticks: {
             padding: 20,
-            fontColor: "#9e9e9e"
+            fontColor: "#d0e423"
           }
         }]
       }
@@ -444,6 +448,7 @@ demo = {
         fill: true,
         backgroundColor: gradientStroke,
         borderColor: '#1f8ef1',
+        color: '#d0e423',
         lineTension: 0,
         borderWidth: 2,
         borderDash: [],
@@ -459,6 +464,8 @@ demo = {
       },
       ]
     };
+     
+            
 
     var myChart = new Chart(ctxGreen, {
       type: 'line',
