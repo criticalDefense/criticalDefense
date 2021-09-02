@@ -20,7 +20,7 @@
                   rows="4"
                   cols="80"
                   class="form-control"
-                  id="persons"
+                  id="eventName"
                 ></textarea>
               </div>
             </div>
@@ -29,7 +29,12 @@
             <div class="col-md-12 pr-md-1">
               <div class="form-group">
                 <label>Date and Time?</label>
-                <textarea rows="4" cols="80" class="form-control"></textarea>
+                <textarea
+                  rows="4"
+                  cols="80"
+                  class="form-control"
+                  id="time"
+                ></textarea>
               </div>
             </div>
           </div>
@@ -41,7 +46,7 @@
                   rows="4"
                   cols="80"
                   class="form-control"
-                  id=""
+                  id="venue"
                 ></textarea>
               </div>
             </div>
@@ -50,30 +55,45 @@
             <div class="col-md-12 pr-md-1">
               <div class="form-group">
                 <label>Location?</label>
-                <textarea rows="4" cols="80" class="form-control"></textarea>
+                <textarea
+                  rows="4"
+                  cols="80"
+                  class="form-control"
+                  id="location"
+                ></textarea>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-8">
               <div class="form-group">
-                <label>Point of contact?</label>
-                <textarea rows="4" cols="80" class="form-control"></textarea>
+                <label>Point of Contact?</label>
+                <textarea
+                  rows="4"
+                  cols="80"
+                  class="form-control"
+                  id="contact"
+                ></textarea>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-8">
               <div class="form-group">
-                <label>Additiona Information?</label>
-                <textarea rows="4" cols="80" class="form-control"></textarea>
+                <label>Additional Information?</label>
+                <textarea
+                  rows="4"
+                  cols="80"
+                  class="form-control"
+                  id="information"
+                ></textarea>
               </div>
             </div>
           </div>
         </form>
       </div>
       <div class="card-footer">
-        <a href="/"
+        <a href=""
           ><button type="submit" class="btn btn-fill btn-primary" id="submit">
             Submit
           </button></a
@@ -87,6 +107,6 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}{% csrf_token %}
-<script src="static/assets/js/core/freshDesk/postFreshdesk.js"></script>
+<script src="static/assets/js/core/freshDesk/postEvent.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 {% endblock javascripts %}
