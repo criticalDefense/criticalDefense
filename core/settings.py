@@ -16,11 +16,11 @@ PROJECT_DIR = Path(__file__).parent
 SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_1122')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # load production server from .env
 ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '134.209.208.72', 'portal.local',
-                 'knicks.portal.local', '.portal.local', config('SERVER', default='127.0.0.1')]
+                 'knicks.portal.local', '.portal.local', '143.198.154.109', 'test1.143.198.154.109' config('SERVER', default='127.0.0.1')]
 
 # Application definition
 
