@@ -120,7 +120,7 @@ if DEBUG:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django_tenants.postgresql_psycopg2',
+            'ENGINE': 'django_tenants.postgresql_backend',
             'NAME': 'cdefense',
             'USER': 'cdefense_admin',
             'PASSWORD': 'Twocaper1',
