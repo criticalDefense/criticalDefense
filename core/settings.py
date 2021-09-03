@@ -121,8 +121,8 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django_tenants.postgresql_psycopg2',
-            'NAME': 'cDefense',
-            'USER': 'cDefense_admin',
+            'NAME': 'cdefense',
+            'USER': 'cdefense_admin',
             'PASSWORD': 'Twocaper1',
             'HOST': 'localhost',
             'PORT': '',
