@@ -119,16 +119,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #         }
 #     }
 # else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django_tenants.postgresql_backend',
-            'NAME': 'cdefense',
-            'USER': 'cdefense_admin',
-            'PASSWORD': 'Twocaper1',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django_tenants.postgresql_backend',
+        'NAME': 'cdefense',
+        'USER': 'cdefense_admin',
+        'PASSWORD': 'Twocaper1',
+        'HOST': 'localhost',
+        'PORT': '',
     }
+}
 
 
 # Password validation
