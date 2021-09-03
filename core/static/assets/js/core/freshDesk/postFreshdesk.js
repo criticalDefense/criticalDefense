@@ -36,7 +36,7 @@ $(document).ready(function () {
         ""
       );
 
-      var cap = capital(pageURL);
+      var cap = 'Test1';
 
       $.ajax({
         url: "https://" + yourdomain + ".freshdesk.com/api/v2/contacts ",
