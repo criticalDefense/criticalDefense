@@ -20,7 +20,7 @@ DEBUG = True
 
 # load production server from .env
 ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '134.209.208.72', 'portal.local',
-                 'knicks.portal.local', '.portal.local', config('SERVER', default='127.0.0.1')]
+                 'knicks.portal.local', '.portal.local', '143.198.154.109', 'test1.143.198.154.109', config('SERVER', default='127.0.0.1')]
 
 # Application definition
 
@@ -28,6 +28,7 @@ STATICFILES_FINDERS = [
     "django_tenants.staticfiles.finders.TenantFileSystemFinder",  # Must be first
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
 
 ]
 
@@ -106,28 +107,28 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django_tenants.postgresql_backend',
-            'NAME': 'cdefense',
-            'USER': 'postgres',
-            'PASSWORD': 'Twocaper1',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django_tenants.postgresql_backend',
+#             'NAME': 'cdefense',
+#             'USER': 'postgres',
+#             'PASSWORD': 'Twocaper1',
+#             'HOST': 'localhost',
+#             'PORT': '5432',
+#         }
+#     }
+# else:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django_tenants.postgresql_backend',
+        'NAME': 'cdefense',
+        'USER': 'cdefense_admin',
+        'PASSWORD': 'Twocaper1',
+        'HOST': 'localhost',
+        'PORT': '',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django_tenants.postgresql_backend',
-            'NAME': 'criticaldefensedb',
-            'USER': 'john',
-            'PASSWORD': '1123Marlowe',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
-    }
+}
 
 
 # Password validation
