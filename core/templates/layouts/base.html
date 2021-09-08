@@ -30,6 +30,7 @@
       href="{% static 'assets/css/black-dashboard.css' %}"
       rel="stylesheet"
     />
+    <link href="{% static 'assets/css/normalize.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/calendar.css' %}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
 
@@ -39,9 +40,8 @@
 
   <body class="">
     <div class="wrapper">
-      {% if user.is_authenticated %}
-      {% include 'includes/sidebar.html' %}
-      {% endif %}
+      {% if user.is_authenticated %} {% include 'includes/sidebar.html' %} {%
+      endif %}
 
       <div class="main-panel">
         {% include 'includes/navigation.html' %}
@@ -50,7 +50,8 @@
       </div>
     </div>
 
-    {% include 'includes/scripts.html' %} {% include 'includes/scripts-sidebar.html' %}
+    {% include 'includes/scripts.html' %} {% include
+    'includes/scripts-sidebar.html' %}
 
     <!-- Specific Page JS goes HERE  -->
     {% block javascripts %}{% endblock javascripts %}
