@@ -43,8 +43,7 @@
 
   <body class="">
     <div class="wrapper">
-      {% if user.is_authenticated %} {% include 'includes/sidebar.html' %} {%
-      endif %}
+      {% if user.is_authenticated %} {% include 'includes/sidebar.html' %} {% endif %}
 
       <div class="main-panel">
         {% include 'includes/navigation.html' %}
@@ -53,8 +52,7 @@
       </div>
     </div>
 
-    {% include 'includes/scripts.html' %} {% include
-    'includes/scripts-sidebar.html' %}
+    {% include 'includes/scripts.html' %} {% include 'includes/scripts-sidebar.html' %}
 
     <!-- Specific Page JS goes HERE  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
