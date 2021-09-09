@@ -84,6 +84,7 @@ $(document).ready(function () {
         '"}}';
 
       $.ajax({
+        crossOrigin: true,
         url: "https://" + yourdomain + ".freshdesk.com/api/v2/tickets",
         type: "POST",
         contentType: "application/json; charset=utf-8",
