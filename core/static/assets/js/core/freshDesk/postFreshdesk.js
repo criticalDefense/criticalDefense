@@ -39,6 +39,7 @@ $(document).ready(function () {
       var cap = 'Test1';
 
       $.ajax({
+        crossOrigin: true,
         url: "https://" + yourdomain + ".freshdesk.com/api/v2/contacts ",
         type: "GET",
         contentType: "application/json; charset=utf-8",
