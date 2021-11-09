@@ -64,7 +64,7 @@ $(document).ready(function () {
       ticket_data =
         '{ "description": "Details about the issue...", "subject": "Support Needed...", "email": "' +
         companyEmail +
-        '", "priority": 2, "status": 2, "custom_fields" : {"cf_name_of_event": "' +
+        '", "priority": 2, "status": 2, "custom_fields" : {"cf_description_of_the_concern": "' +
         $("#eventName").val() +
         '","cf_date_and_time": "' +
         $("#time").val() +
