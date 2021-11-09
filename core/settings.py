@@ -107,28 +107,28 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# if DEBUG:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': 'cdefense',
-        'USER': 'postgres',
-        'PASSWORD': 'Twocaper1',
-        'HOST': 'localhost',
-        'PORT': '5432',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django_tenants.postgresql_backend',
+            'NAME': 'cdefense',
+            'USER': 'postgres',
+            'PASSWORD': 'Twocaper1',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
-# else:
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django_tenants.postgresql_backend',
-#         'NAME': 'cdefense',
-#         'USER': 'cdefense_admin',
-#         'PASSWORD': 'Twocaper1',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django_tenants.postgresql_backend',
+            'NAME': 'cdefense',
+            'USER': 'cdefense_admin',
+            'PASSWORD': 'Twocaper1',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 
 # Password validation

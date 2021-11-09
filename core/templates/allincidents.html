@@ -28,6 +28,55 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div
+  class="modal modal-black show"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="badge badge-dark" id="ticket"></h5>
+        <p><span id="spnId"></span></p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+        >
+          <i class="tim-icons icon-simple-remove"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <p><span class="badge badge-dark">Ticket Details:</span></p>
+            <p><span class="badge badge-dark" >Person(s) Displaying Concerning Behavior(Name, Age, Residence Address)?</span><span id="spnPerson"></span></p>
+            <p><span class="badge badge-dark">Description of the concern/Event?</span><span id="spnConcern"></span></p></p>
+            <p><span class="badge badge-dark">When and where is the incident/action going to occur?</span><span id="spnPlace"></span></p>
+            <p><span class="badge badge-dark">Is anyone else aware of the concern?</span><span id="spnAware"></span></p></p>
+            <p><span class="badge badge-dark">If yes who?</span><span id="spnWho"></span></p></p>
+            <p><span class="badge badge-dark">Additional Information?</span><span id="spnInfo"></span></p></p>
+            <p><span class="badge badge-dark">Would you like to speak to a investigator?</span><span id="spnInvest"></span></p></p>
+            <p><span class="badge badge-dark">If yes, please provide your name and/or phone number?</span><span id="spnPhone"></span></p></p>
+            <p><span class="badge badge-dark">Name of Event?</span><span id="spnName"></span></p></p>
+            <p><span class="badge badge-dark">Date and Time?</span><span id="spnDate"></span></p></p>
+            <p><span class="badge badge-dark">Event Venue?</span><span id="spnVenue"></span></p></p>
+            <p><span class="badge badge-dark">Location?</span><span id="spnLocation"></span></p></p>
+            <p><span class="badge badge-dark">Point of Contact?</span><span id="spnContact"></span></p></p>
+            <p><span class="badge badge-dark">Additonal Information?</span><span id="spnAddInfo"></span></p></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
